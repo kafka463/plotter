@@ -30,6 +30,31 @@ roll=0
 pitch=0
 yaw=0
 
+# graph
+roll_graph = graph(xtitle="",ytitle="roll")
+roll_curve = gcurve(color=color.red,label="roll",graph=roll_graph)
+time =0 
+
+
+
+def updateSim():
+
+    k=vector(cos(yaw)*cos(pitch), sin(pitch),sin(yaw)*cos(pitch))
+    y=vector(0,1,0)
+    s=cross(k,y)
+    v=cross(s,k)
+    vrot=v*cos(roll)+cross(k,v)*sin(roll)
+    
+    frontArrow.axis=k
+    sideArrow.axis=cross(k,vrot)
+    upArrow.axis=vrot
+    myObj.axis=k
+    myObj.up=vrot
+    sideArrow.length=2
+    frontArrow.length=4
+    upArrow.length=1
+
+ 
 
 
 while (True):
@@ -50,20 +75,7 @@ while (True):
             yaw=-math.atan2(2*(q0*q3+q1*q2),1-2*(q2*q2+q3*q3))-np.pi/2
     
             rate(100)
-            k=vector(cos(yaw)*cos(pitch), sin(pitch),sin(yaw)*cos(pitch))
-            y=vector(0,1,0)
-            s=cross(k,y)
-            v=cross(s,k)
-            vrot=v*cos(roll)+cross(k,v)*sin(roll)
-            
-            frontArrow.axis=k
-            sideArrow.axis=cross(k,vrot)
-            upArrow.axis=vrot
-            myObj.axis=k
-            myObj.up=vrot
-            sideArrow.length=2
-            frontArrow.length=4
-            upArrow.length=1
+            updateSim()
 
 
             
