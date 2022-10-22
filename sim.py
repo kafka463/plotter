@@ -54,7 +54,9 @@ def updateSim():
     frontArrow.length=4
     upArrow.length=1
 
- 
+def drawGraph():
+    time = time+1 
+    roll_curve.plot(time,roll)  
 
 
 while (True):
@@ -76,6 +78,7 @@ while (True):
     
             rate(100)
             updateSim()
+            drawGraph()
 
 
             
