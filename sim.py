@@ -33,6 +33,11 @@ yaw=0
 # graph
 roll_graph = graph(xtitle="",ytitle="roll")
 roll_curve = gcurve(color=color.red,label="roll",graph=roll_graph)
+pitch_graph = graph(xtitle="",ytitle="pitch")
+pitch_curve = gcurve(color=color.red,label ="pitch",graph=pitch_graph)
+yaw_graph = graph(xtitle="",ytitle="yaw")
+yaw_curve = gcurve(color=color.red,label ="yaw",graph=yaw_graph)
+
 time =0 
 
 
@@ -54,7 +59,11 @@ def updateSim():
     frontArrow.length=4
     upArrow.length=1
 
- 
+def drawGraph():
+    time = time+1 
+    roll_curve.plot(time,roll)  
+    roll_curve.plot(time,pitch)  
+    roll_curve.plot(time,yaw)  
 
 
 while (True):
@@ -76,6 +85,7 @@ while (True):
     
             rate(100)
             updateSim()
+            drawGraph()
 
 
             
